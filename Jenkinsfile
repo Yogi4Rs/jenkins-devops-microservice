@@ -19,7 +19,8 @@ pipeline {
 				echo "Integration Test"
 			}
 		}
-	} post {
+	} 
+	post {
 		always {
 			echo "I'm awesome and i run always"
 			}
