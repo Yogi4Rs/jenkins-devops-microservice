@@ -2,12 +2,7 @@
 
 pipeline {
 
-	agent {
-    docker {
-        image 'yogi4rs/maven-docker:17'
-        args '-v /var/run/docker.sock:/var/run/docker.sock'
-    }
-}
+	agent any
 
 
 	// agent {docker {image 'maven:3.6.3'}}
