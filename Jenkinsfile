@@ -2,7 +2,12 @@
 
 pipeline {
 
-	agent any
+	agent {
+    docker {
+      image 'maven:3.9.6-eclipse-temurin-17'
+      args '-v /root/.m2:/root/.m2'
+    }
+  }
 
 
 	// agent {docker {image 'maven:3.6.3'}}
@@ -11,6 +16,7 @@ pipeline {
 		mavenHome = tool 'myMaven'
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
+
 	stages {
 		stage('Checkout') {
 			steps{
@@ -44,32 +50,32 @@ pipeline {
 			}
 		}
 
-		stage('package'){
-			steps{
+		// stage('package'){
+		// 	steps{
 				
-				sh "mvn package -DskipTests"
-			}
-		}
+		// 		sh "mvn package -DskipTests"
+		// 	}
+		// }
 
-		stage('Build docker image'){
-			steps{
-				// "docker build -t yogi4rs/currency-exchange-devops:$env.BUILD_TAG"  this is directly writting the code
-				// you can write using the inbuild script
-				script{
-					dockerImage = docker.build("yogi4rs/currency-exchange-devops:$env.BUILD_TAG")
-				}
-			}
-		}
-		stage('Push docker image'){
-			steps{
-				script{
-					docker.withRegistry('', 'dockerhub'){
-					dockerImage.push();
-					dockerImage.push('latest');
-					}
-				}
-			}
-		}
+		// stage('Build docker image'){
+		// 	steps{
+		// 		// "docker build -t yogi4rs/currency-exchange-devops:$env.BUILD_TAG"  this is directly writting the code
+		// 		// you can write using the inbuild script
+		// 		script{
+		// 			dockerImage = docker.build("yogi4rs/currency-exchange-devops:$env.BUILD_TAG")
+		// 		}
+		// 	}
+		// }
+		// stage('Push docker image'){
+		// 	steps{
+		// 		script{
+		// 			docker.withRegistry('', 'dockerhub'){
+		// 			dockerImage.push();
+		// 			dockerImage.push('latest');
+		// 			}
+		// 		}
+		// 	}
+		// }
 
 	} 
 	// post {
