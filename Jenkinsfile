@@ -16,7 +16,6 @@ pipeline {
 		stage('Checkout') {
 			steps{
 				sh 'mvn --version'
-				sh 'apt-get update && apt-get install -y docker.io'
 				sh 'docker version'
 				echo "Build"
 				echo "PATH - $PATH"
