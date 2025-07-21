@@ -2,7 +2,12 @@
 
 pipeline {
 
-	agent any
+	agent {
+        docker {
+            image 'openjdk:8-jdk'
+            args '-v $HOME/.m2:/root/.m2' // optional: mount maven cache
+        }
+    }
 
 
 	// agent {docker {image 'maven:3.6.3'}}
