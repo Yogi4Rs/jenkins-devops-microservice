@@ -44,13 +44,32 @@ pipeline {
 			}
 		}
 
-		stage('Build docker image'){
+		stage('package'){
 			steps{
 				
-				sh "mvn failsafe:integration-test failsafe:verify"
+				sh "mvn package -DskipTests"
 			}
 		}
-		
+
+		stage('Build docker image'){
+			steps{
+				// "docker build -t yogi4rs/currency-exchange-devops:$env.BUILD_TAG"  this is directly writting the code
+				// you can write using the inbuild script
+				script{
+					dockerImage = docker.build("yogi4rs/currency-exchange-devops:$env.BUILD_TAG")
+				}
+			}
+		}
+		stage('Push docker image'){
+			steps{
+				script{
+					docker.withRegistry('', 'dockerhub'){
+					dockerImage.push();
+					dockerImage.push('latest');
+					}
+				}
+			}
+		}
 
 	} 
 	// post {
