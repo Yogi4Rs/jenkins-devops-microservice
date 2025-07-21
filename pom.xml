@@ -6,7 +6,7 @@
 
 	<groupId>com.in28minutes.microservices</groupId>
 	<artifactId>currency-exchange-basic</artifactId>
-	<version>0.0.1-RELEASE</version> 
+	<version>0.0.1-RELEASE</version>
 	<packaging>jar</packaging>
 	<name>currency-exchange</name>
 
@@ -30,11 +30,14 @@
 		<failsafe.version>2.22.1</failsafe.version>
 
 		<jacoco.version>0.8.10</jacoco.version>
-		<jacoco.path>${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar</jacoco.path>
+		<jacoco.path>
+			${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar</jacoco.path>
 		<jacoco.utReport>${project.build.directory}/jacoco.exec</jacoco.utReport>
 		<jacoco.itReport>${project.build.directory}/jacoco-it.exec</jacoco.itReport>
-		<jacoco.utAgentConfig>-javaagent:${jacoco.path}=destfile=${jacoco.utReport}</jacoco.utAgentConfig>
-		<jacoco.itAgentConfig>-javaagent:${jacoco.path}=destfile=${jacoco.itReport}</jacoco.itAgentConfig>
+		<jacoco.utAgentConfig>
+			-javaagent:${jacoco.path}=destfile=${jacoco.utReport}</jacoco.utAgentConfig>
+		<jacoco.itAgentConfig>
+			-javaagent:${jacoco.path}=destfile=${jacoco.itReport}</jacoco.itAgentConfig>
 
 		<jacoco-listeners.version>5.10.2.17019</jacoco-listeners.version>
 	</properties>
@@ -64,20 +67,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>3.0.1</version>
 		</dependency>
 		<dependency>
-	<groupId>org.glassfish.jaxb</groupId>
-	<artifactId>jaxb-runtime</artifactId>
-	<version>3.0.2</version>
-	<exclusions>
-		<exclusion>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-osgi</artifactId>
-		</exclusion>
-	</exclusions>
-</dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>3.0.2</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
@@ -90,8 +88,8 @@
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
-				<groupId>org.codehaus.groovy</groupId>
-				<artifactId>groovy</artifactId>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -161,7 +159,7 @@
 	<build>
 		<finalName>currency-exchange</finalName>
 		<plugins>
-			
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -173,7 +171,8 @@
 				<configuration>
 					<!-- JDK 7 - relax bytecode verifier to prevent double -->
 					<!-- instrumentation issues with OpenJPA tests and JaCoCo -->
-					<!-- <argLine>-XX:-UseSplitVerifier ${jacoco.utAgentConfig}</argLine> -->
+					<!-- <argLine>-XX:-UseSplitVerifier
+					${jacoco.utAgentConfig}</argLine> -->
 					<!-- JDK 8 - bytecode verifier cannot be relaxed or disabled -->
 					<!-- to prevent runtime errors, OpenJPA tests are ignored -->
 					<argLine>${jacoco.utAgentConfig}</argLine>
