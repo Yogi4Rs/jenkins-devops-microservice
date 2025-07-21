@@ -12,10 +12,10 @@ pipeline {
 				echo "Build"
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
-				echo "BUILD ID - $evn.BUILD_ID"
-				echo "JOB NAME - $evn.JOB_NAME"
-				echo "BUILD TAG - $evn.BUILD_TAG"
-				echo "BUILD URL - $evn.BUILD_URL"
+				echo "BUILD ID - $env.BUILD_ID"
+				echo "JOB NAME - $env.JOB_NAME"
+				echo "BUILD TAG - $env.BUILD_TAG"
+				echo "BUILD URL - $env.BUILD_URL"
 			}
 		}
 		stage('Test') {
@@ -29,15 +29,15 @@ pipeline {
 			}
 		}
 	} 
-	post {
-		always {
-			echo "I'm awesome and i run always"
-			}
-		success {
-			echo "I run only when successful"
-			}
-		failure {
-			echo "I run only when fail"
-			}	
-	}
+	// post {
+	// 	always {
+	// 		echo "I'm awesome and i run always"
+	// 		}
+	// 	success {
+	// 		echo "I run only when successful"
+	// 		}
+	// 	failure {
+	// 		echo "I run only when fail"
+	// 		}	
+	// }
 }
