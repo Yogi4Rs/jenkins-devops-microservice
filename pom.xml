@@ -180,6 +180,9 @@
 						<!--<exclude>**/*ApplicationTests.java</exclude> -->
 						<exclude>**/RunCucumberIntegrationTestCase.java</exclude>
 					</excludes>
+					<includes>
+						<include>**/*erTest.java</include>
+					</includes>
 					<properties>
 						<!-- add SonarQube's JaCoCo listener to enable -->
 						<!-- gathering of code coverage metrics per test -->

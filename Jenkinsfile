@@ -33,16 +33,25 @@ pipeline {
 
 		stage('Test') {
 			steps{
-				echo "Test"
+				
 				sh "mvn test"
 			}
 		}
 		stage('Integration Test'){
 			steps{
-				echo "Integration Test"
+				
 				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
+
+		stage('Build docker image'){
+			steps{
+				
+				sh "mvn failsafe:integration-test failsafe:verify"
+			}
+		}
+		
+
 	} 
 	// post {
 	// 	always {
