@@ -2,7 +2,12 @@
 
 pipeline {
 
-	agent any
+	agent {
+    docker {
+      image 'maven:3.9.6-eclipse-temurin-17' // includes Maven + JDK 17
+      args '-v /root/.m2:/root/.m2' // optional for cache
+    	}
+ 	 }
 
 	// agent {docker {image 'maven:3.6.3'}}
 	environment {
